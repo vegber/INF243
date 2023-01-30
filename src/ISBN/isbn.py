@@ -15,41 +15,31 @@ The last two digits is check digits - used to validate if the code
 
 # ISBN - 13 CHECK DIGIT CALCULATION
 
-# isbn = list(map(int, input("ISBN - 13 stream: ")))
 # 978-1?38551992
-isbn = list(map(int, str(978138551992)))
-print(isbn)
 
-def calculateMissingDigit(list_isbn: list):
-    i = 0
-    while True:
-        list_isbn = list_isbn[:4] + [i] + list_isbn[4:]
-        if calculateISBN(list_isbn):
-            break
-        i += 1
-        if i == 13:
-            break
 
 def calculateISBN(isbn):
     # assert len(isbn) == 13, "Should be 13 digits long!"
     out = 0
-    for x in range(len(isbn) ):
+    for x in range(len(isbn)):
         if x % 2 == 1:
             out += isbn[x]*3
         else:
             out += isbn[x]
+    missing_nbr = out % 10
+    print("missing number %d \n" % missing_nbr)
+    
+    out = isbn[:4] + [missing_nbr] + isbn[4:]
+
+    out = ''.join(list(map(str, out))) 
     print(out) 
-    diff = out % 10
-    return diff
+    print(f"ISBN: {out[:3]}-{out[3:]}")
+    return out
 
-# calculateMissingDigit(isbn)
-# print(calculateISBN([9,7,8,0,3,0,6,4,0,6,1,5]))
-missing_nbr = calculateISBN(isbn)
-print("missing number %d \n" % missing_nbr)
-out = isbn[:4] + [missing_nbr] + isbn[4:]
-first = ''.join(list(map(str, out[:3])))
-sec = ''.join(list(map(str, out[3:])))
-print(f"isbn: {first}-{sec}")
-print(out)
-
+# number format (ISBN) 
+# ISBN: XXX-XXXXXXXXXX
 # should be one 
+if __name__=="__main__":
+    MISSING_ISBN_STRING =  978138551992
+    isbn = list(map(int, str(MISSING_ISBN_STRING)))
+    calculateISBN(isbn)

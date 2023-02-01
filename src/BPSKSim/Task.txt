@@ -1,0 +1,34 @@
+
+(1)
+    Write a program that will simulate a BPSK communication system with unequal bit probabilities.
+    Using your program, create data from which to plot the probability of bit error obtained from
+    your simulation for SNRs in the range from 0 to 10 dB, for the three cases that P_0 = 0.5  
+        (in which case your plot should look much like Figure 1.10), P_0 = 0.25 and P_0 = 0.1.
+    Decide Appropriate value of N
+
+
+(2) 
+    Prepare data from which to plot the theoretical probability of error (1.24) for the same 
+    three valuesof P_0. (Maybe: Combine these first two programs into single program) 
+
+
+(3) 
+    Plot the simulated probability of error on the same axes as the theoretical probability of 
+    error. The plot should have (E_b) / (N_0) in dB as the horizontal axis and the probability
+    as the vertical axis, plotted on a logarithmic scale (e.g, semilogy in MatLab)
+
+
+(4)
+    Compare the theoretical and simulated results. Comment on the accuracy of the simulation and
+    the amount of time it took to run the simulation. Comment on the importance opf theoretical 
+    models (where it is possible to obtain them). 
+
+
+Coded BPSK Simulation: 
+
+(1) 
+    Write a program that will simulate performance of the (7, 4) Hamming code over a BSC 
+    channel with channel crossover probabiltiy p = Q(sqrt(2(E_b)/N_0)) and plot the probability
+    of error as a function of E_b/N_0 in dB. On the same plot, plot the theoretical probability
+    of error for uncoded BPSK transmission. Identify what the coding gain is for a probability of 
+    error P_b = 10^(-5) 

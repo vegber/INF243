@@ -51,7 +51,9 @@ def probability_of_bit_error(bits, received_bits):
 
     Returns: 
         The prob. of bit error (float) 
-        
+        :param bits:
+        :param received_bits:
+
     """
 
     N = len(bits)
@@ -74,7 +76,7 @@ def simulation_of_SNRs(P_0):
     print(SNR_values)
     bit_error_prob = []
     for snr in SNR_values:
-        bits = np.random.randint(0, 2, 10000)
+        bits = np.random.randint(0, 2, 10000)  # N - random bits
         received_bits = BPSK(bits=bits, P_0=P_0)
         bit_error_prob.append(probability_of_bit_error(bits=bits, received_bits=received_bits))
     return SNR_values, bit_error_prob

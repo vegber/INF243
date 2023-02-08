@@ -11,9 +11,6 @@ def BPSK_Sim(p):
     EbN0dB_range = range(0, 11)
     ber = [None] * len(EbN0dB_range)
 
-    det_ = 0
-    tx_symbol = 0
-    n
     for n in range(len(EbN0dB_range)):
         EbN0dB = EbN0dB_range[n]
         EbN0 = pow(dB, (EbN0dB / dB))

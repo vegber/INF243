@@ -27,9 +27,12 @@ def BPSK_SIM(p, N=500000):
 
 
 def plot(P):
+    colors = ["g", "b", "r", "y", 'c', 'm', 'k']
+    i = 0
     for p in P:
         EbNodB_range, ber = BPSK_SIM(p)
-        plt.plot(EbNodB_range, ber, 'bo--', color=random.choice(["g", "b", "r", "y", 'c', 'm', 'k']), label=f"{p}")
+        plt.plot(EbNodB_range, ber, 'bo--', color=colors[i], label=f"{p}")
+        i += 1
     plt.axis([0, 10, 1e-6, 0.1])
 #     plt.xscale('linear')
     plt.yscale('log')

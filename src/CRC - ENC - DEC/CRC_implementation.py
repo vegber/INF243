@@ -34,12 +34,11 @@ def file_exists(filename) -> bool:
 
 
 def crc_encode(data, divisor):
-    print(data)
     # Convert data to binary string
     binary_data = bin(int.from_bytes(data, byteorder='big'))[2:]
 
     # Pad binary data with zeros
-    binary_data += '0' * (len(divisor) - 1)
+    binary_data += '0' * (len(str(divisor)) - 1)
 
     # Convert divisor to binary string
     binary_divisor = bin(divisor)[2:]
@@ -62,8 +61,8 @@ def crc_encode(data, divisor):
 
 def crc_decode(data, divisor):
     # Split data into message and CRC
-    message = data[:-len(divisor)]
-    crc = data[-len(divisor):]
+    message = data[:-len(str(divisor))]
+    crc = data[-len(str(divisor)):]
 
     # Compute CRC for message
     computed_crc = binascii.crc_hqx(message, 0xFFFF)
@@ -84,5 +83,14 @@ if __name__ == '__main__':
     = 1 * x ^ 16 + 0 * x ^ 15 + 0 * x ^ 14 + 0 * x ^ 13 + 0 * x ^ 12 + 0 * x ^ 11 + 1 * x ^ 10 + 0 * x ^ 9
     + 1 * x ^ 8 + 1 * x ^ 7 + 0 * x ^ 6 + 0 * x ^ 5 + 0 * x ^ 4 + 1 * x ^ 3 + 0 * x ^ 2 + 0 * x ^ 1 + 1 * x ^ 0
     """
-    g = int('1000000001100001', 2)
-    print(bin(int("0x8061", 16)))
+    g = int('1000000001100001', 16)
+    # ggg = int('1000000001100001', 2).to_bytes(128, byteorder="big")
+    divisor = 0x11021  # hex(int(0b10001000000100001))
+    var = 0x1021
+    with open('random_bits.bin', 'rb') as f:
+
+        data_ = f.read()
+        f.close()
+
+    coded = crc_encode(data_, divisor=divisor)
+    decoded = crc_decode(coded, divisor=divisor)

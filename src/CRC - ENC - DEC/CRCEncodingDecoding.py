@@ -70,7 +70,7 @@ class CRC:
         Calculate the CRC check of a string of bits using a chosen polynomial
         :param bitstream: stream of binary bits (str)
         :param check_value: stream of binary bits (str)
-        :return:
+        :return: True/False
         """
         data = bitstream.lstrip('0')  # remove any head zero bits
 

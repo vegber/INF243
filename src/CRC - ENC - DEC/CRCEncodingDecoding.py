@@ -22,6 +22,7 @@ step (3)
 import binascii
 import re
 
+
 def fnInBin(s):
     return set(s).issubset({'0'}) and bool(s)
 
@@ -38,6 +39,7 @@ def findWindow(bit_stream):
     else:
         return -1
 
+
 class CRC:
     def __init__(self, divisor: str):
         self.polynomial_bitstream = bin(int(divisor, 2))[2:]
@@ -53,11 +55,30 @@ class CRC:
         Returns: Encoded data with CRC on right end: tail encoding
         """
         binary_data = data_bitstream.lstrip("0")  # remove any head zero bits
-        padding_bits = '0'*crc_bits  # get length of bit stream
+        padding_bits = '0' * crc_bits  # get length of bit stream
         bit_stream = binary_data + padding_bits
 
         op = len(self.polynomial_bitstream)
-        while not fnInBin(bit_stream[:len(bit_stream)-op]):
+        while not fnInBin(bit_stream[:len(bit_stream) - len(padding_bits)]):
             t = findWindow(bit_stream)
-            rep = xor(bit_stream[t:t+len(self.polynomial_bitstream)],  self.polynomial_bitstream)
+            rep = xor(bit_stream[t:t + op], self.polynomial_bitstream)
             bit_stream = bit_stream[:t] + rep + bit_stream[t + len(rep):]
+        return bit_stream[:len(bit_stream) - len(padding_bits)], bit_stream[-len(padding_bits):]
+
+    def CRC_Check(self, bitstream: str, check_value: str) -> bool:
+        """
+        Calculate the CRC check of a string of bits using a chosen polynomial
+        :param bitstream: stream of binary bits (str)
+        :param check_value: stream of binary bits (str)
+        :return:
+        """
+        data = bitstream.lstrip('0')  # remove any head zero bits
+
+        bit_stream = data + check_value
+
+        op = len(self.polynomial_bitstream)
+        while not fnInBin(bit_stream[:len(bit_stream) - len(check_value)]):
+            t = findWindow(bit_stream)
+            rep = xor(bit_stream[t:t + op], self.polynomial_bitstream)
+            bit_stream = bit_stream[:t] + rep + bit_stream[t + len(rep):]
+        return fnInBin(bit_stream)

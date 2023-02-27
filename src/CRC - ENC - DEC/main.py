@@ -44,5 +44,8 @@ div = "1011"
 obj = sondre.CRC(div)
 
 message = "11010011101100"
-_ = obj.Encode(message, 3)
-print(_)
+encoded, crc_check = obj.Encode(message, 3)
+print(encoded, crc_check)
+b = obj.CRC_Check(message, crc_check)
+print(b)
+

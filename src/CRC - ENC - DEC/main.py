@@ -191,14 +191,14 @@ if __name__ == '__main__':
 
     # !=!=!=!
     # Remember uncomment this!
-    if os.path.isfile("encoded_bits.txt"):
+    if not os.path.isfile("encoded_bits.txt"):
         Encoding()
         # Run file through BSC with diff. prob
         # write result to individual file
         Encoding_Sent_Over_BSC(p=[0.00001, 0.001, 0.1])
 
     # Now for "decoding" or crc check
-    if os.path.isfile("crc_values"):
+    if not os.path.isfile("crc_values"):
         Decoding()  # creates the "correct" crc values file
         # now check each file over the BSC channel to that file
         CheckBSCFiles(p=[0.00001, 0.001, 0.1])

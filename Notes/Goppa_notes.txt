@@ -1,0 +1,4 @@
+Alice write her message and repr. in binary strings of bits. Encrypt every string. 
+Then, choose random error vector with weight of t or less, add to encryption. Thus: y = m*G' + e 
+ 
+ 

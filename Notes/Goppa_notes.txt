@@ -1,4 +1,7 @@
 Alice write her message and repr. in binary strings of bits. Encrypt every string. 
 Then, choose random error vector with weight of t or less, add to encryption. Thus: y = m*G' + e 
  
- 
+Bob would use his matrix P to compute y' = y*P(inv) 
+Then, use the decoding algorithm for his Goppa code G to error correct y', into the codeword m' = mS by finding e'. Since he already knows S^-1, he can calc. org. message m  = m'S^-1 
+
+
